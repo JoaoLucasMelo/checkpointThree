@@ -1,1 +1,6 @@
 /* BASIC STYLES HERE */
+
+
+.minheight {
+  min-height: 30vh;
+}
