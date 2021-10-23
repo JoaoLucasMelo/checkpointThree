@@ -2,7 +2,6 @@ import { stickersService } from "../Services/StickersService.js";
 import { ProxyState } from "../AppState.js";
 import { loadState, saveState } from "../Utils/LocalStorage.js";
 import { tasksService } from "../Services/TasksService.js"
-import { generateId } from "../Utils/generateId.js";
 
 // function _drawTask(){
 //   if(ProxyState.sticker.length >= 1){
@@ -13,12 +12,21 @@ import { generateId } from "../Utils/generateId.js";
 //   }
 // }
 
+
 function _drawSticker(){
   const sticker = ProxyState.sticker
   let template = ''
   sticker.forEach( s => template += s.Template)
   document.getElementById('stickers').innerHTML = template
 }
+function test(){
+
+if(document.getElementById('check') == 'yes'){
+return document.getElementById('remove').classList.remove('visually-hidden') }
+}
+
+
+  
 
 export class StickersController {
 constructor(){
@@ -26,7 +34,8 @@ constructor(){
   ProxyState.on('tasks', _drawSticker)
   ProxyState.on('sticker', saveState)
   ProxyState.on('tasks', saveState)
-
+  test()
+ 
 
   loadState()
 }
@@ -50,6 +59,7 @@ createTask(sId){
   const formElem = window.event.target
   let tasksData ={
     task: formElem.task.value,
+    check: formElem.value,
     stickerId: sId,
 
   }

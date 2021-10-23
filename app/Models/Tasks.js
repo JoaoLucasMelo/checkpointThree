@@ -18,7 +18,7 @@ get Templatetask(){
 return `
 <div class="col-1">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="${this.check}" id="flexCheckDefault">
+              <input class="form-check-input" type="checkbox"  value="yes" id="check" name="yes" >
               <label class="form-check-label" for="flexCheckDefault"></label>
             </div>
           </div>
@@ -26,8 +26,9 @@ return `
             <p class="m-0 ">${this.task}</p>
           </div>
           <div class="col-1 p-0 text-center">
-          <a title="Delete Task" class="button bs-danger" onclick="app.stickersController.removeTask('${this.id}')"><i class="fas fa-minus-circle"></i></a>
+          <a id="remove" title="Delete Task" class="button bs-danger "  onclick="app.stickersController.removeTask('${this.id}')"><i class="fas fa-minus-circle"></i></a>
           </div>
+ 
 `
 }
 
