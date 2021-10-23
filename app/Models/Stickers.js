@@ -1,31 +1,54 @@
+import { ProxyState } from "../AppState.js"
 import { generateId } from "../Utils/generateId.js"
-
-
 
 
 export class Stickers {
 
   constructor(data){
-    this.id = generateId()
+    this.id = data.id || generateId()
     this.name = data.name
     this.color = data.color
   }
   
   get Template() {
     return `
-    <div class="col-md-3">
-          <div class="card m-3 text-dark border-top-0 bg-light">
-            <div class="bg-info p-1 rounded-top"></div>
-            <div class="card-body">
-              <h5 class="card-title">Task</h5>
-            </div>
-          </div>
+    <div class="col-md-4">
+    <div class="card m-3 text-dark minheight shadow border-top-0 bg-light">
+      <div class="a${this.id}e p-1 rounded-top"></div>
+        <style>
+        .a${this.id}e {
+          background-color: ${this.color};
+          }
+        </style>
+      <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <h5 class="card-title text-center">${this.name}</h5>
+        <a title="Delete Sticky Note" class="button bs-danger"
+        onclick="app.stickersController.removeSticker('${this.id}')"><i class="fas fa-times"></i></a>
+      </div>
+        <div id="tasks" class="row flex-direction-column">
+          ${this.getTasks()}
         </div>
+      </div>
+      <form onsubmit="app.stickersController.createTask('${this.id}')"
+        class="form-floating d-flex m-2 justify-content-between align-items-center">
+         <input type="text" class="form-control" id="task" placeholder="..." value="">
+          <label class="fst-italic" for="floatingInputValue">Add New Task</label>
+       </form>
+    </div>
+  </div>
 `
   }
   
-  
-  
+  getTasks(){
+    let template = ''
+    const tasks = ProxyState.tasks.filter(t => this.id == t.stickerId)
+    tasks.forEach(t => { template += t.Templatetask })
+    return template
+
+  }
+
+
   
   
   }

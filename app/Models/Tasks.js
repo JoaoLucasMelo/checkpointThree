@@ -8,19 +8,26 @@ import { generateId } from "../Utils/generateId.js"
 export class Tasks {
 
 constructor(data){
-  this.id = generateId()
+  this.id = data.id || generateId()
   this.task = data.task
   this.check = data.check
+  this.stickerId = data.stickerId
 }
 
-get Template(){
+get Templatetask(){
 return `
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-      Task Defined
-    </label>
-  </div>
+<div class="col-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="${this.check}" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault"></label>
+            </div>
+          </div>
+          <div class="col-10 pe-0">
+            <p class="m-0 ">${this.task}</p>
+          </div>
+          <div class="col-1 p-0 text-center">
+          <a title="Delete Task" class="button bs-danger" onclick="app.stickersController.removeTask('${this.id}')"><i class="fas fa-minus-circle"></i></a>
+          </div>
 `
 }
 
