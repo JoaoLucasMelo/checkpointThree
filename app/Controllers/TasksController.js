@@ -1,35 +1,50 @@
-// import { ProxyState } from "../AppState.js"
-// import { tasksService } from "../Services/TasksService.js"
-// import { loadState, saveState } from "../Utils/LocalStorage.js";
-
-// function _drawTask(){
-//   const task = ProxyState.tasks
-//   let template = ''
-//   task.forEach( t => template += t.Template)
-//   document.getElementById('tasks').innerHTML = template
-// }
+import { ProxyState } from "../AppState.js"
+import { tasksService } from "../Services/TasksService.js"
+import { loadState, saveState } from "../Utils/LocalStorage.js";
 
 
-// export class TasksController{
-// constructor(){
+function _drawtasks(){
 
-// ProxyState.on('tasks', saveState)
-// loadState()
-// }
+  let checks = 0
+  let checking = ProxyState.tasks.find(c => c.check)
+
+  console.log(checking)
+}
 
 
 
-// createTask(stickerId){
-//   window.event.preventDefault()
-//   const formElem = window.event.target
-//   let tasksData ={
-//     name: formElem.task.value,
-//     stickerId: stickerId
-//   }
+export class TasksController{
+constructor(){
 
-//   console.log('creating task', tasksData)
-//   tasksService.createTask(tasksData)
-// }
+}
+myFunction(id) {
+tasksService.myFunction(id)
+  }
 
 
-// }
+createTask(sId){
+
+  window.event.preventDefault()
+  const formElem = window.event.target
+  let tasksData ={
+    task: formElem.task.value,
+    checked: false,
+    stickerId: sId,
+  }
+  tasksService.createTask(tasksData)
+  formElem.reset()
+  console.log(ProxyState.tasks.find(c => c.checked))
+}
+boxCheck(id) {
+  tasksService.boxCheck(id)
+}
+
+removeTask(id){
+  if (confirm("Are you sure? Press OK to Delete")){
+    tasksService.removeTask(id)
+  }
+  
+}
+
+
+}

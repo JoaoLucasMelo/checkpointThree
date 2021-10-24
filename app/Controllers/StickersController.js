@@ -1,16 +1,7 @@
 import { stickersService } from "../Services/StickersService.js";
 import { ProxyState } from "../AppState.js";
 import { loadState, saveState } from "../Utils/LocalStorage.js";
-import { tasksService } from "../Services/TasksService.js"
 
-// function _drawTask(){
-//   if(ProxyState.sticker.length >= 1){
-//   const task = ProxyState.tasks
-//   let templatetask = ''
-//   task.forEach( t => templatetask += t.Templatetask)
-//   document.getElementById('tasks').innerHTML = templatetask
-//   }
-// }
 
 
 function _drawSticker(){
@@ -19,11 +10,16 @@ function _drawSticker(){
   sticker.forEach( s => template += s.Template)
   document.getElementById('stickers').innerHTML = template
 }
-function test(){
+function removebtn(){}
+//   // if( ProxyState.tasks.length >= 1){
+// let num = ProxyState.tasks.find(n => n.checked)
+//   if ( num.checked == true ){ 
+//   document.getElementById('remove').classList.remove('visually-hidden')
+//   } else if ( num.checked == false ) {
+//     document.getElementById('remove').classList.add('visually-hidden')
+    
+//   } console.log(num.checked) }
 
-if(document.getElementById('check') == 'yes'){
-return document.getElementById('remove').classList.remove('visually-hidden') }
-}
 
 
   
@@ -34,10 +30,12 @@ constructor(){
   ProxyState.on('tasks', _drawSticker)
   ProxyState.on('sticker', saveState)
   ProxyState.on('tasks', saveState)
-  test()
- 
+  ProxyState.on('tasks', removebtn )
+ _drawSticker
 
   loadState()
+  
+
 }
 createSticker(){
   window.event.preventDefault()
@@ -51,25 +49,27 @@ createSticker(){
       formElem.reset()
 }
 removeSticker(id){
+  if (confirm("Are you sure? Press OK to Delete")){
   stickersService.removeSticker(id)
 }
-createTask(sId){
-
-  window.event.preventDefault()
-  const formElem = window.event.target
-  let tasksData ={
-    task: formElem.task.value,
-    check: formElem.value,
-    stickerId: sId,
-
-  }
-  tasksService.createTask(tasksData)
-  formElem.reset()
 }
-  removeTask(id){
+// indiv(){
+// let one = ProxyState.tasks.find(o => o.stickerId)
+// let two = ProxyState.tasks.find(o => o.id)
+// if ( one !== two){
+// var number = 0
+// for ( let i = 0; i < ProxyState.tasks.length; i++){
+// number = i+1 }}
+// console.log(number)
+// }
 
-    tasksService.removeTask(id)
-  }
+
+
+
+
+
+
+
 
 
 }
